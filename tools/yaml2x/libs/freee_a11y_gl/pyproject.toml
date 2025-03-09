@@ -10,6 +10,21 @@ authors = [
     {name = "Masafumi NAKANE", email = "max@freee.co.jp"}
 ]
 requires-python = ">=3.8"
+dependencies = [
+    "pyyaml>=6.0",
+    "GitPython>=3.1.0"
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0"
+]
 
 [tool.setuptools]
 packages = { find = {} }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --cov=freee_a11y_gl --cov-report=term-missing"

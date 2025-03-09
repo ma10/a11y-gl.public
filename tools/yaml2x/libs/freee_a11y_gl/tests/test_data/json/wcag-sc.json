@@ -1,0 +1,26 @@
+{
+  "1.1.1": {
+    "id": "1.1.1",
+    "title": {
+      "ja": "非テキストコンテンツ",
+      "en": "Non-text Content"
+    },
+    "url": "https://www.w3.org/WAI/WCAG21/Understanding/non-text-content"
+  },
+  "3.2.1": {
+    "id": "3.2.1",
+    "title": {
+      "ja": "フォーカス",
+      "en": "On Focus"
+    },
+    "url": "https://www.w3.org/WAI/WCAG21/Understanding/on-focus"
+  },
+  "test_sc": {
+    "id": "test_sc",
+    "title": {
+      "ja": "テスト達成基準",
+      "en": "Test Success Criterion"
+    },
+    "url": "https://example.com/test-sc"
+  }
+}

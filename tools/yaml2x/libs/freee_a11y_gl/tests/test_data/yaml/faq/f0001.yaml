@@ -1,0 +1,45 @@
+id: f0001
+sortKey: 10000
+updated: '2024-03-09'
+tags:
+  - markup
+  - test_tag
+title:
+  ja: テストFAQ
+  en: Test FAQ
+problem:
+  ja: |-
+    テスト用の問題
+    
+    どのようにすればよいでしょうか？
+  en: |-
+    Test problem
+    
+    How should we handle this?
+solution:
+  ja: |-
+    テスト用の解決策:
+    
+    1. 手順1
+    2. 手順2
+    3. 手順3
+  en: |-
+    Test solution:
+    
+    1. Step 1
+    2. Step 2
+    3. Step 3
+explanation:
+  ja: |-
+    この解決策の背景説明。
+    
+    なぜこの方法が推奨されるのか。
+  en: |-
+    Background explanation for this solution.
+    
+    Why this approach is recommended.
+guidelines:
+  - gl-test
+checks:
+  - '0001'
+  - '0002'

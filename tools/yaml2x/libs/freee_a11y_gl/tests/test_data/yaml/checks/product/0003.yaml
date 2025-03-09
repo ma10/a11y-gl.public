@@ -1,0 +1,33 @@
+id: '0003'
+sortKey: 300000
+severity: critical
+target: product
+platform:
+  - web
+  - mobile
+check:
+  ja: プロダクトテストチェック項目
+  en: Product test check item
+conditions:
+  - platform: web
+    type: simple
+    id: 0003-web-test
+    tool: manual
+    procedure:
+      ja: Webプラットフォームのテスト手順
+      en: Test procedure for web platform
+  - platform: mobile
+    type: and
+    conditions:
+      - type: simple
+        id: 0003-ios-test
+        tool: manual
+        procedure:
+          ja: iOSでのテスト手順
+          en: Test procedure for iOS
+      - type: simple
+        id: 0003-android-test
+        tool: manual
+        procedure:
+          ja: Androidでのテスト手順
+          en: Test procedure for Android

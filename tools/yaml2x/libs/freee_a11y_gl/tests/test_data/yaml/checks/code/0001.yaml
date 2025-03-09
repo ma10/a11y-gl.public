@@ -1,0 +1,22 @@
+id: '0001'
+sortKey: 100000
+severity: normal
+target: code
+platform:
+  - web
+check:
+  ja: コードテストチェック項目
+  en: Code test check item
+implementations:
+  - title:
+      ja: 実装例1
+      en: Implementation example 1
+    methods:
+      - platform: web
+        method:
+          ja: テスト実装方法1
+          en: Test implementation method 1
+      - platform: web
+        method:
+          ja: テスト実装方法2
+          en: Test implementation method 2

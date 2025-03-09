@@ -1,0 +1,10 @@
+id: '0002'
+sortKey: 200000
+severity: major
+target: design
+platform:
+  - web
+  - mobile
+check:
+  ja: デザインテストチェック項目
+  en: Design test check item

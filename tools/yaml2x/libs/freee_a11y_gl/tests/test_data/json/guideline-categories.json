@@ -1,0 +1,24 @@
+{
+  "dynamic_content": {
+    "id": "dynamic_content",
+    "title": {
+      "ja": "動的コンテンツ",
+      "en": "Dynamic Content"
+    },
+    "description": {
+      "ja": "動的なコンテンツに関するガイドライン",
+      "en": "Guidelines for dynamic content"
+    }
+  },
+  "test_category": {
+    "id": "test_category",
+    "title": {
+      "ja": "テストカテゴリー",
+      "en": "Test Category"
+    },
+    "description": {
+      "ja": "テスト用のカテゴリー",
+      "en": "Category for testing"
+    }
+  }
+}

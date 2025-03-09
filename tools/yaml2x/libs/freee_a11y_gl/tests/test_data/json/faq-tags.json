@@ -1,0 +1,24 @@
+{
+  "markup": {
+    "id": "markup",
+    "title": {
+      "ja": "マークアップ",
+      "en": "Markup"
+    },
+    "description": {
+      "ja": "HTMLマークアップに関する質問",
+      "en": "Questions about HTML markup"
+    }
+  },
+  "test_tag": {
+    "id": "test_tag",
+    "title": {
+      "ja": "テストタグ",
+      "en": "Test Tag"
+    },
+    "description": {
+      "ja": "テスト用のタグ",
+      "en": "Tag for testing"
+    }
+  }
+}

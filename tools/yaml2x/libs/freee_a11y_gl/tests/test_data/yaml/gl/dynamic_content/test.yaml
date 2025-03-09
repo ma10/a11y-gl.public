@@ -1,0 +1,30 @@
+id: gl-test
+sortKey: 1000
+category: dynamic_content
+title:
+  ja: テストガイドライン
+  en: Test Guideline
+platform:
+  - web
+  - mobile
+guideline:
+  ja: |-
+    テスト用のガイドライン説明文
+    
+    - 項目1
+    - 項目2
+  en: |-
+    Test guideline description
+    
+    - Item 1
+    - Item 2
+sc:
+  - 1.1.1
+  - test_sc
+intent:
+  ja: このガイドラインの目的説明
+  en: Purpose explanation of this guideline
+checks:
+  - '0001'
+  - '0002'
+  - '0003'
