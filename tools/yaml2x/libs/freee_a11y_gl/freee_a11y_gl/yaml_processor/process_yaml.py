@@ -5,7 +5,14 @@ This module provides the core functionality for converting YAML files to JSON fo
 focusing on accessibility guidelines processing.
 """
 
+import json
+from pathlib import Path
 from typing import Dict, Any, Optional
+
+import jsonschema
+import yaml
+
+from freee_a11y_gl.settings import settings
 
 from freee_a11y_gl import (
     InfoRef,
@@ -16,6 +23,28 @@ from freee_a11y_gl import (
     setup_instances
 )
 from . import rst_processor
+
+def validate_with_schema(data: Dict[str, Any], schema_path: str) -> None:
+    """
+    Validate data against a JSON schema.
+
+    Args:
+        data: The data to validate
+        schema_path: Path to the JSON schema file
+
+    Raises:
+        jsonschema.exceptions.ValidationError: If validation fails
+        jsonschema.exceptions.SchemaError: If schema is invalid
+        FileNotFoundError: If schema file not found
+    """
+    schema_file = Path(schema_path)
+    if not schema_file.exists():
+        raise FileNotFoundError(f"Schema file not found: {schema_path}")
+    
+    with schema_file.open() as f:
+        schema = json.load(f)
+    
+    jsonschema.validate(data, schema)
 
 def process_yaml_data(basedir: Optional[str] = None) -> Dict[str, Any]:
     """
@@ -29,9 +58,16 @@ def process_yaml_data(basedir: Optional[str] = None) -> Dict[str, Any]:
 
     Raises:
         Exception: If there's an error during the conversion process
+        jsonschema.exceptions.ValidationError: If validation fails
+        jsonschema.exceptions.SchemaError: If schema is invalid
+        FileNotFoundError: If schema file not found
     """
     # Get version info and setup instances with basedir
     version_info: Dict[str, str] = get_version_info(basedir)
+
+    # If schema validation is configured, validate the data
+    if schema_path := settings.get("schemas.check"):
+        validate_with_schema(version_info, schema_path)
     setup_instances(basedir)
 
     # Process information links and references

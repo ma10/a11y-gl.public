@@ -3,6 +3,13 @@
 # Base URL for the site
 base_url: "https://a11y-guidelines.freee.co.jp"
 
+# JSON Schema validation settings
+schemas:
+  # Path to JSON schema files (optional)
+  check: "schemas/check.json"        # Schema for check YAML files
+  faq: "schemas/faq.json"           # Schema for FAQ YAML files
+  guideline: "schemas/guideline.json" # Schema for guideline YAML files
+
 # Language settings
 languages:
   available: ["ja", "en"]

@@ -23,6 +23,12 @@ class LanguageConfig(BaseModel):
     available: list[str] = Field(default_factory=lambda: ["ja", "en"])
     default: str = "ja"
 
+class SchemaConfig(BaseModel):
+    """JSON Schema configuration."""
+    check: Optional[str] = Field(default=None, description="Path to JSON schema file for check YAML")
+    faq: Optional[str] = Field(default=None, description="Path to JSON schema file for FAQ YAML")
+    guideline: Optional[str] = Field(default=None, description="Path to JSON schema file for guideline YAML")
+
 class PathConfig(BaseModel):
     """Path configuration."""
     guidelines: str = Field(default="/categories/", description="Guidelines path (must start and end with /)")
@@ -52,6 +58,7 @@ class PathConfig(BaseModel):
 class GlobalConfig(BaseModel):
     """Global configuration model."""
     languages: LanguageConfig = Field(default_factory=lambda: LanguageConfig())
+    schemas: SchemaConfig = Field(default_factory=lambda: SchemaConfig())
     base_url: str = Field(default="https://a11y-guidelines.freee.co.jp")
     paths: PathConfig = Field(default_factory=lambda: PathConfig())
     locale: Dict[str, LocaleConfig] = Field(default_factory=lambda: {
