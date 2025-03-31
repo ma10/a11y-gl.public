@@ -61,7 +61,7 @@ def setup_instances(basedir: Optional[str] = None):
     rel.resolve_faqs()
     return rel
 
-def process_axe_rules(basedir: Optional[str], AXE_CORE):
+def process_axe_rules(basedir: Optional[str], AXE_CORE: dict) -> None:
     """
     Process axe-core rules from the Git submodule.
     
@@ -114,7 +114,10 @@ def process_axe_rules(basedir: Optional[str], AXE_CORE):
     AxeRule.deque_url = AXE_CORE['deque_url']
     AxeRule.timestamp = time.strftime("%F %T%z", time.localtime(axe_commit.authored_date))
 
-def ls_dir(dirname, extension=None):
+def ls_dir(dirname: str, extension: Optional[str] = None) -> list[str]:
+    if not os.path.isdir(dirname):
+        raise FileNotFoundError(f"Directory not found: {dirname}")
+    
     files = []
     for currentDir, dirs, fs in os.walk(dirname):
         for f in fs:
@@ -122,7 +125,7 @@ def ls_dir(dirname, extension=None):
                 files.append(os.path.join(currentDir, f))
     return files
 
-def read_file_content(file_path):
+def read_file_content(file_path: str) -> str:
     """
     Read and return the content of a file.
 
@@ -138,7 +141,7 @@ def read_file_content(file_path):
     except Exception as e:
         raise e
 
-def handle_file_error(e, file_path):
+def handle_file_error(e: Exception, file_path: str) -> None:
     """
     Handle file-related errors.
 
@@ -149,7 +152,7 @@ def handle_file_error(e, file_path):
     print(f"Error with file {file_path}: {e}", file=sys.stderr)
     sys.exit(1)
 
-def read_yaml_file(file):
+def read_yaml_file(file: str) -> dict:
     try:
         file_content = read_file_content(file)
     except Exception as e:
@@ -158,7 +161,7 @@ def read_yaml_file(file):
 
     return data
 
-def process_entity_files(srcdir, constructor):
+def process_entity_files(srcdir: str, constructor: type) -> None:
     files = ls_dir(srcdir)
     for file in files:
         try:
@@ -172,7 +175,7 @@ def process_entity_files(srcdir, constructor):
         except Exception as e:
             handle_file_error(e, file)
 
-def process_static_entity_file(srcfile, constructor):
+def process_static_entity_file(srcfile: str, constructor: type) -> None:
     try:
         file_content = read_file_content(srcfile)
     except Exception as e:
