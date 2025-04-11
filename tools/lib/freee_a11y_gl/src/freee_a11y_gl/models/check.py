@@ -55,7 +55,7 @@ class Check(BaseModel):
 
     def template_data(self, lang: str, **kwargs) -> Dict[str, Any]:
         """Get template data for check.
-        
+
         Args:
             lang: Language code
             **kwargs: Additional template parameters
@@ -349,40 +349,6 @@ class YouTube:
             'title': self.title
         }
 
-@dataclass
-class Method:
-    """Implementation method for a check."""
-    platform: str
-    method: Dict[str, str]
-
-    def template_data(self, lang: str) -> Dict[str, str]:
-        """Get template data for method.
-        
-        Args:
-            lang: Language code
-        """
-        return {
-            'platform': settings.get(f'platform.names.{lang}.{self.platform}', self.platform),
-            'method': self.method[lang]
-        }
-
-@dataclass
-class Implementation:
-    """Implementation details for a check."""
-    title: Dict[str, str]
-    methods: List[Dict[str, Any]]
-
-    def __post_init__(self):
-        """Convert method dictionaries to Method objects."""
-        self.methods = [Method(**method) for method in self.methods]
-
-    def template_data(self, lang: str) -> Dict[str, Any]:
-        """Get template data for implementation."""
-        return {
-            'title': self.title[lang],
-            'methods': [method.template_data(lang) for method in self.methods]
-        }
-
 class Procedure:
     """Check procedure for validation."""
 
@@ -533,3 +499,37 @@ class Condition:
             # 子conditionsに親のplatformを渡す（is_top=Falseで）
             data['conditions'] = [cond.object_data(platform, is_top=False) for cond in self.conditions]
         return data
+
+@dataclass
+class Method:
+    """Implementation method for a check."""
+    platform: str
+    method: Dict[str, str]
+
+    def template_data(self, lang: str) -> Dict[str, str]:
+        """Get template data for method.
+        
+        Args:
+            lang: Language code
+        """
+        return {
+            'platform': settings.get(f'platform.names.{lang}.{self.platform}', self.platform),
+            'method': self.method[lang]
+        }
+
+@dataclass
+class Implementation:
+    """Implementation details for a check."""
+    title: Dict[str, str]
+    methods: List[Dict[str, Any]]
+
+    def __post_init__(self):
+        """Convert method dictionaries to Method objects."""
+        self.methods = [Method(**method) for method in self.methods]
+
+    def template_data(self, lang: str) -> Dict[str, Any]:
+        """Get template data for implementation."""
+        return {
+            'title': self.title[lang],
+            'methods': [method.template_data(lang) for method in self.methods]
+        }
