@@ -1,0 +1,91 @@
+id: '0562'
+sortKey: 502500
+severity: major
+target: product
+platform:
+- web
+- mobile
+check:
+  ja: |-
+    スクリーン・リーダーが、表を適切に認識していて、表中のセルも適切に認識している。
+  en: |-
+    The screen reader properly recognizes tables and their cells.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "0562-content-00"
+    procedure:
+      ja: |-
+        チェック対象の画面に表が存在しない。
+      en: |-
+        There are no tables on the screen to be checked.
+  - type: simple
+    tool: nvda
+    id: "0562-nvda-01"
+    procedure:
+      ja: |-
+        以下の手順で、ページ上のすべての表をNVDAで発見することができ、かつ、表中のセル間を移動して、セルの内容を適切に読み上げることができる。
+
+        *  表の発見：
+
+           1. ブラウズ・モードでページの先頭に移動（ :kbd:`Ctrl+Home` ）
+           2. 前後の表への移動（ :kbd:`T` または :kbd:`Shift+T` キー）で、表に移動
+
+        *  表中のセル間を移動して、セルの内容を読み上げる：
+
+           1. ブラウズ・モードで表の先頭部分を探す
+           2. 以下のキー操作でセル間を移動：
+
+              *  :kbd:`Ctrl+Alt+←` ： 左のセル
+              *  :kbd:`Ctrl+Alt+→` ： 右のセル
+              *  :kbd:`Ctrl+Alt+↓` ： 下のセル
+              *  :kbd:`Ctrl+Alt+↑` ： 上のセル
+      en: |-
+        The following steps allow you to discover all tables on the page with NVDA and move among cells within the tables to read the cell content properly.
+
+        *  Discovering tables:
+
+           1. Move to the top of the page in browse mode (:kbd:`Ctrl+Home`)
+           2. Move to the previous/next table (:kbd:`T` or :kbd:`Shift+T`)
+
+        *  Moving among cells within tables and reading the cell contents:
+
+           1. Find the beginning of the table in browse mode
+           2. Move among cells using the following key operations:
+
+              *  :kbd:`Ctrl+Alt+←` : the cell to the left
+              *  :kbd:`Ctrl+Alt+→` : the cell to the right
+              *  :kbd:`Ctrl+Alt+↓` : the cell below
+              *  :kbd:`Ctrl+Alt+↑` : the cell above
+
+    note:
+      ja: |-
+        セル移動時に読み上げられる内容：
+
+        上記のセル間移動の操作を行った場合、以下の内容が読み上げられます。
+
+        *  左右の移動：移動先のセルの列見出し、列の番号、セルの内容
+        *  上下の移動： 移動先のセルの行見出し、行の番号、セルの内容
+
+        ブラウズ・モードで単に矢印キーを操作した場合は、以下のような内容が読み上げられます。
+
+        *  上下矢印： 前後のセルへ移動して読み上げ。ただしセル内で改行がある場合などは、セルの1部分だけが読み上げられることもある。
+        *  左右矢印： 1文字ずつ移動して読み上げ。空のセルでは、1つだけスペースがあるような挙動になる。
+      en: |-
+        What to be announced when moving among table cells：
+
+        The following content is announced when moving among cells using the functions listed above.
+
+        *  move to left/right: the column header, column number, and the content of the destination cell
+        *  move up/down: the row header, row number, and the content of the destination cell
+
+        The following is announced if arrow keys are simply used in browse mode:
+
+        *  up/down arrows: move to the previous/next cell and announce the cell content; only a part of the cell might be read if there are line-breaks within the cell.
+        *  left/right arrows: move and announce character by character; the behavior on empty cells is as if there is only one space character
+    YouTube:
+      id: lnW6TRgkBg0
+      title: 表【NVDAでアクセシビリティー チェック】

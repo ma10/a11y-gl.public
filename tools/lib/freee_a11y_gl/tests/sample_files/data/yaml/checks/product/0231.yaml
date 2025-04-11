@@ -1,0 +1,11 @@
+id: '0231'
+sortKey: 502100
+severity: major
+target: product
+platform:
+- web
+check:
+  ja: |-
+    クリックやマウスオーバーなどのマウス操作を受け付けるものは、キーボードのみでも操作できる。
+  en: |-
+    Anything that accepts mouse operation, such as clicks and hover, can also be operated using only the keyboard.

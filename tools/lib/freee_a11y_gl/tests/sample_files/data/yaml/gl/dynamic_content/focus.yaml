@@ -1,0 +1,34 @@
+id: gl-dynamic-content-focus
+sortKey: 2006
+category: dynamic_content
+title:
+  ja: OnFocus/OffFocus時の挙動
+  en: OnFocus/OffFocus Behavior
+platform:
+- web
+- mobile
+guideline:
+  ja: |-
+    OnFocus, OffFocusが以下のような変化を発生させないようにする。
+
+    -  ページ遷移
+    -  フォーム送信
+    -  モーダル・ダイアログの表示
+  en: |-
+    OnFocus and OffFocus events should not cause changes like the following:
+
+    -  Page transition
+    -  Form submission
+    -  Display of modal dialog
+sc:
+- 3.2.1
+intent:
+  ja: |-
+    視覚障害、認知障害があるユーザーにとって予期できない挙動を発生させない。
+  en: |-
+    Do not cause unexpected behavior for users with visual or cognitive impairments.
+checks:
+- '0152'
+- '0171'
+info:
+- exp-tab-order-check

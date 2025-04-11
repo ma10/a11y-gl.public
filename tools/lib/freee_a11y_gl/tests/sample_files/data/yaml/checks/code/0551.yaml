@@ -1,0 +1,35 @@
+id: '0551'
+sortKey: 200800
+severity: normal
+target: code
+platform:
+- web
+- mobile
+check:
+  ja: |-
+    見出しが、設計資料に従って適切に実装されている。
+  en: |-
+    Headings are implemented appropriately according to the design documentation.
+implementations:
+- title:
+    ja: 見出しの実装
+    en: Heading Implementation
+  methods:
+  - platform: web
+    method:
+      ja: |-
+        ``h1`` ～ ``h6`` でマークアップする。
+      en: |-
+        Mark up with ``h1`` to ``h6``.
+  - platform: ios
+    method:
+      ja: |-
+        ``UIAccessibilityTraits.header`` をセットする。
+      en: |-
+        Set ``UIAccessibilityTraits.header``.
+  - platform: android
+    method:
+      ja: |-
+        当該テキストに対して ``android:accessiblityHeading`` を ``true`` に設定する（Android 9以降）
+      en: |-
+        Set ``android:accessiblityHeading`` to ``true`` for the text in question (Android 9 or later)

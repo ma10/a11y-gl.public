@@ -1,0 +1,25 @@
+id: gl-input-device-focus-indicator
+sortKey: 1316
+category: input_device
+title:
+  ja: フォーカス箇所の可視化
+  en: Visualization of Focus Areas
+platform:
+- web
+guideline:
+  ja: |-
+    キーボードで操作可能な要素について、フォーカス・インジケーターを消さない。
+  en: |-
+    Do not remove focus indicators from elements that can be operated by keyboard.
+sc:
+- 2.4.7
+intent:
+  ja: |-
+    キーボードのみを使っている場合でも、フォーカスされている箇所が分かるようにし、操作を可能にする。
+  en: |-
+    Ensure that the focused area is discernible and operable even when using only a keyboard.
+checks:
+- '0151'
+- '0171'
+info:
+- exp-tab-order-check

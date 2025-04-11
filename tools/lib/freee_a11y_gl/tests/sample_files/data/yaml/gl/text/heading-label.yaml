@@ -1,0 +1,25 @@
+id: gl-text-heading-label
+sortKey: 1411
+category: text
+title:
+  ja: 適切な文言の見出し
+  en: Appropriate Wording for Headings
+platform:
+- web
+- mobile
+guideline:
+  ja: |-
+    主題又は目的を説明する見出しを付ける。
+  en: |-
+    Provide headings that describe the topic or purpose.
+sc:
+- 2.4.6
+intent:
+  ja: |-
+    視覚障害者が、ページ内で目的のコンテンツを見つけやすくする。
+  en: |-
+    Ensure that users with visual impairments can easily find the content they are looking for within a page.
+checks:
+- '0271'
+info:
+- exp-text-wording
