@@ -32,9 +32,9 @@ class FaqTag(BaseModel):
             lang: Language code
             
         Returns:
-            Localized name, falls back to English
+            Localized name, falls back to Japanese if not available
         """
-        return self.names.get(lang, self.names['en'])
+        return self.names.get(lang, self.names['ja'])
 
     def template_data(self, lang: str) -> Optional[Dict[str, Any]]:
         """Get template data for tag.
