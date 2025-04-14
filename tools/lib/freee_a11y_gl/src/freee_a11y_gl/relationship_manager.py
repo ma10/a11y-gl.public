@@ -111,3 +111,15 @@ class RelationshipManager:
         """
         objects = self.get_related_objects(obj, related_type)
         return sorted(objects, key=lambda x: getattr(x, key))
+
+    @classmethod
+    def reset(cls) -> None:
+        """Reset the RelationshipManager to its initial state."""
+        if cls._instance is not None:
+            cls._instance._data = {}
+            cls._instance._unresolved_faqs = {}
+            cls._instance._initialized = False
+        else:
+            cls._data = {}
+            cls._unresolved_faqs = {}
+            cls._initialized = False
