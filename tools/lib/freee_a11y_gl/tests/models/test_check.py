@@ -6,8 +6,8 @@ from freee_a11y_gl.models.reference import InfoRef
 from unittest.mock import Mock
 import os
 import yaml
+from pathlib import Path
 
-   
 class TestCheck:
     def test_init(self):
         """Test initialization of Check."""
@@ -221,19 +221,12 @@ class TestCheck:
         }
         assert object_data == expected_object_data
 
-    def test_list_all_src_paths(self, sample_dir):
+    def test_list_all_src_paths(self, check_factory, sample_dir):
         """Test listing all source paths using sample data."""
-        # Load sample data
-        sample_check_path = os.path.join(sample_dir, "checks", "sample_check.yaml")
-        with open(sample_check_path, "r", encoding="utf-8") as file:
-            check_data = yaml.safe_load(file)
-
-        # Create Check instances
-        for check in check_data:
-            Check(check)
-
-        # Verify source paths
+        sample_data = ["design/0151", "code/0551", "product/0171"]
+        for check in sample_data:
+            check_factory(check)
+        expected_src_paths = [Path(f'{sample_dir}/data/yaml/checks/{check}.yaml') for check in sample_data]
         src_paths = Check.list_all_src_paths()
-        assert len(src_paths) == len(check_data)
-        for check in check_data:
-            assert check["src_path"] in src_paths
+        assert len(src_paths) == len(expected_src_paths)
+        assert set(expected_src_paths) == set(src_paths)

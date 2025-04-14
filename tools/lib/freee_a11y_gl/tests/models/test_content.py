@@ -1,4 +1,6 @@
 import pytest
+from pathlib import Path
+from freee_a11y_gl.models.content import Guideline
 
 class TestGuideline:
     def test_template_data(self, guideline_factory):
@@ -199,3 +201,13 @@ class TestGuideline:
             ]
         }
         assert template_data == expected_template_data
+
+    def test_list_all_src_paths(self, guideline_factory, sample_dir):
+        """Test listing all source paths using sample data."""
+        sample_data = ["form/tab-order", "link/tab-order"]
+        for gl in sample_data:
+            guideline_factory(gl)
+        expected_src_paths = [Path(f'{sample_dir}/data/yaml/gl/{gl}.yaml') for gl in sample_data]
+        src_paths = Guideline.list_all_src_paths()
+        assert len(src_paths) == len(expected_src_paths)
+        assert set(expected_src_paths) == set(src_paths)
