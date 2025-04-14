@@ -7,6 +7,7 @@ from freee_a11y_gl.models.content import Guideline, Category
 from freee_a11y_gl.models.check import Check, CheckTool
 from freee_a11y_gl.constants import CHECK_TOOLS
 from freee_a11y_gl.models.reference import WcagSc
+from freee_a11y_gl.relationship_manager import RelationshipManager
 
 SAMPLES_DIR = Path(__file__).parent / "sample_files"
 
@@ -35,10 +36,11 @@ def reset_instances():
 
     # Clear all instances before the test
     Check._instances.clear()
-    CheckTool._instances.clear()  # Clear existing CheckTool instances
+    CheckTool._instances.clear()
     Guideline._instances.clear()
     WcagSc._instances.clear()
-    # Category._instances.clear()
+    Category._instances.clear()
+    RelationshipManager.reset()
     # InfoRef._instances.clear()
     # Faq._instances.clear()
     # AxeRule._instances.clear()
@@ -49,6 +51,10 @@ def reset_instances():
     # Clear all instances after the test
     Check._instances.clear()
     CheckTool._instances.clear()  # Clear existing CheckTool instances
+    Guideline._instances.clear()
+    WcagSc._instances.clear()
+    Category._instances.clear()
+    RelationshipManager.reset()
 
 @pytest.fixture
 def check_tools():
