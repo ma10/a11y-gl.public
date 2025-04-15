@@ -56,13 +56,8 @@ class TestCheck:
             "src_path": "/path/to/check1"
         }
         check_data2 = {
-            "id": "check2",
-            "sortKey": "001",
-            "check": {"en": "Check 2", "ja": "チェック2"},
-            "severity": "medium",
-            "target": "target2",
-            "platform": ["mobile"],
-            "src_path": "/path/to/check2"
+            **check_data1,
+            **{"id": "check2"}
         }
         Check(check_data1)
         with pytest.raises(ValueError, match="Duplicate check sortKey: 001"):
@@ -106,7 +101,10 @@ class TestCheck:
                 ':ref:`exp-markup-semantics`'
             ]
         }
-        assert template_data['id'] == '0551'
+        check_keys = ["id", "check", "severity", "target", "platform", "guidelines", "implementations", "info_refs"]
+        for key in check_keys:
+            assert key in template_data
+            assert template_data[key] == expected_template_data[key]
         assert template_data == expected_template_data
 
     def test_object_data(self, sample_dir, guideline_factory):
