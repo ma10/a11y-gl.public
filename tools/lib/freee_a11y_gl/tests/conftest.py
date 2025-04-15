@@ -5,8 +5,10 @@ import shutil
 from pathlib import Path
 from freee_a11y_gl.models.content import Guideline, Category
 from freee_a11y_gl.models.check import Check, CheckTool
-from freee_a11y_gl.constants import CHECK_TOOLS
+from freee_a11y_gl.models.faq.article import Faq
+from freee_a11y_gl.models.faq.tag import FaqTag
 from freee_a11y_gl.models.reference import WcagSc
+from freee_a11y_gl.constants import CHECK_TOOLS
 from freee_a11y_gl.relationship_manager import RelationshipManager
 
 SAMPLES_DIR = Path(__file__).parent / "sample_files"
@@ -40,11 +42,11 @@ def reset_instances():
     Guideline._instances.clear()
     WcagSc._instances.clear()
     Category._instances.clear()
+    Faq._instances.clear()
+    FaqTag._instances.clear()
     RelationshipManager.reset()
     # InfoRef._instances.clear()
-    # Faq._instances.clear()
     # AxeRule._instances.clear()
-    # FaqTag._instances.clear()
 
     yield
     
@@ -54,6 +56,8 @@ def reset_instances():
     Guideline._instances.clear()
     WcagSc._instances.clear()
     Category._instances.clear()
+    Faq._instances.clear()
+    FaqTag._instances.clear()
     RelationshipManager.reset()
 
 @pytest.fixture
@@ -93,6 +97,18 @@ def check_factory(sample_dir, check_tools):
     yield _create_check
 
 @pytest.fixture
+def all_guideline_data(sample_dir, guideline_factory):
+    """
+    Load all guideline data from YAML files in the sample directory.
+    """
+    sample_guideline_dir = sample_dir / "data/yaml/gl"
+    guideline_files = sample_guideline_dir.rglob("*.yaml")
+    file_list = [str(file.relative_to(sample_guideline_dir).with_suffix('')) for file in guideline_files]
+    for file in file_list:
+        guideline = guideline_factory(file)
+    yield Guideline
+
+@pytest.fixture
 def guideline_factory(sample_dir, all_check_data, setup_categories, setup_wcag_sc):
     """
     Factory function to create Guideline instances from YAML files.
@@ -105,6 +121,20 @@ def guideline_factory(sample_dir, all_check_data, setup_categories, setup_wcag_s
         return Guideline(guideline_data)
     
     yield _create_guideline
+
+@pytest.fixture
+def faq_factory(sample_dir, all_guideline_data):
+    """
+    Factory function to create Faq instances from YAML files.
+    """
+    def _create_faq(sample_faq_path):
+        sample_faq_file = sample_dir / f"data/yaml/faq/{sample_faq_path}.yaml"
+        with open(sample_faq_file, "r", encoding="utf-8") as file:
+            faq_data = yaml.safe_load(file)
+        faq_data["src_path"] = sample_faq_file
+        return Faq(faq_data)
+    
+    yield _create_faq
 
 @pytest.fixture
 def setup_categories(sample_dir):
@@ -131,3 +161,16 @@ def setup_wcag_sc(sample_dir):
     for key, data in wcag_sc_data.items():
         WcagSc(key, data)
     yield WcagSc
+
+@pytest.fixture
+def setup_faq_tags(sample_dir):
+    """
+    Set up FAQ tags for tests.
+    This fixture is used to set up any necessary FAQ tags before running tests.
+    """
+    sample_faq_tags_file = sample_dir / "data/json/faq-tags.json"
+    with open(sample_faq_tags_file, "r", encoding="utf-8") as file:
+        tag_data = json.load(file)
+    for key, data in tag_data.items():
+        FaqTag(key, data)
+    yield FaqTag
