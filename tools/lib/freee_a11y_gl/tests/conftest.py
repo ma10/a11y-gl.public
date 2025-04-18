@@ -123,7 +123,7 @@ def guideline_factory(sample_dir, all_check_data, setup_categories, setup_wcag_s
     yield _create_guideline
 
 @pytest.fixture
-def faq_factory(sample_dir, all_guideline_data):
+def faq_factory(sample_dir, all_guideline_data, setup_faq_tags):
     """
     Factory function to create Faq instances from YAML files.
     """

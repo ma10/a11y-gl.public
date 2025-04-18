@@ -57,3 +57,5 @@ guidelines:
 - gl-input-device-focus-indicator
 - gl-input-device-keyboard-operable
 - gl-link-tab-order
+faqs:
+- d0001
